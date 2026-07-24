@@ -424,23 +424,25 @@ const musicBtn = document.getElementById("musicBtn");
 
 let playing = false;
 
-musicBtn.addEventListener("click",()=>{
+musicBtn.addEventListener("click", async () => {
 
-if(playing){
+    if (!playing) {
 
-music.pause();
+        try {
+            await music.play();
+            playing = true;
+            musicBtn.innerHTML = "⏸️ Müziği Durdur";
+        } catch (e) {
+            console.log(e);
+        }
 
-musicBtn.innerHTML="▶️ Müziği Başlat";
+    } else {
 
-}else{
+        music.pause();
+        playing = false;
+        musicBtn.innerHTML = "▶️ Müziği Başlat";
 
-music.play();
-
-musicBtn.innerHTML="⏸️ Müziği Durdur";
-
-}
-
-playing=!playing;
+    }
 
 });
 </script>
