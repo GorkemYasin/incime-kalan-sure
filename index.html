@@ -238,53 +238,7 @@ font-size:42px;
 }
 
 }
-#musicBtn{
 
-position:fixed;
-
-bottom:25px;
-
-right:25px;
-
-padding:15px 25px;
-
-border:none;
-
-border-radius:50px;
-
-background:rgba(255,255,255,.2);
-
-backdrop-filter:blur(15px);
-
-color:white;
-
-font-size:16px;
-
-cursor:pointer;
-
-box-shadow:0 10px 25px rgba(0,0,0,.3);
-
-z-index:9999;
-
-transition:.3s;
-
-}
-
-#musicBtn:hover{
-
-transform:scale(1.1);
-
-background:rgba(255,255,255,.35);
-
-}
-
-#musicBtn:hover{
-
-transform:scale(1.08);
-
-background:rgba(255,255,255,.30);
-
-}
 #player{
 
 position:fixed;
@@ -382,7 +336,7 @@ accent-color:#ff4fa3;
 </head>
 
 <body>
-<audio id="music" autoplay loop>
+<audio id="music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 <div class="container">
@@ -533,48 +487,27 @@ music.volume = 0.35;
 
 // Tarayıcı otomatik çalmayı engellerse
 
-const musicBtn = document.getElementById("musicBtn");
 
-let playing = false;
-
-musicBtn.addEventListener("click", async () => {
-
-    if (!playing) {
-
-        try {
-            await music.play();
-            playing = true;
-            musicBtn.innerHTML = "⏸️ Müziği Durdur";
-        } catch (e) {
-            console.log(e);
-        }
-
-    } else {
-
-        music.pause();
-        playing = false;
-        musicBtn.innerHTML = "▶️ Müziği Başlat";
-
-    }
-
-});
 const playBtn = document.getElementById("playBtn");
 const muteBtn = document.getElementById("muteBtn");
 const progress = document.getElementById("progress");
 
 playBtn.onclick = () => {
 
-    if (music.paused) {
+if (music.paused) {
 
-        music.play();
+    music.play().then(() => {
         playBtn.innerHTML = "⏸️";
+    }).catch(err => {
+        console.log(err);
+    });
 
-    } else {
+} else {
 
-        music.pause();
-        playBtn.innerHTML = "▶️";
+    music.pause();
+    playBtn.innerHTML = "▶️";
 
-    }
+}
 
 };
 
