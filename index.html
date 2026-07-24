@@ -47,7 +47,7 @@ height:100%;
 
 background:rgba(0,0,0,.45);
 
-backdrop-filter:blur(3px);
+backdrop-filter:blur(0px);
 
 }
 
@@ -63,13 +63,13 @@ padding:45px;
 
 border-radius:30px;
 
-background:rgba(255,255,255,.12);
+background:rgba(20,20,20,.28);
 
-backdrop-filter:blur(16px);
-
-box-shadow:0 20px 60px rgba(0,0,0,.4);
+box-shadow:0 20px 60px rgba(0,0,0,.35);
 
 text-align:center;
+
+border:1px solid rgba(255,255,255,.15);
 
 }
 
@@ -238,7 +238,53 @@ font-size:42px;
 }
 
 }
+#musicBtn{
 
+position:fixed;
+
+bottom:25px;
+
+right:25px;
+
+padding:15px 25px;
+
+border:none;
+
+border-radius:50px;
+
+background:rgba(255,255,255,.2);
+
+backdrop-filter:blur(15px);
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+
+z-index:9999;
+
+transition:.3s;
+
+}
+
+#musicBtn:hover{
+
+transform:scale(1.1);
+
+background:rgba(255,255,255,.35);
+
+}
+
+#musicBtn:hover{
+
+transform:scale(1.08);
+
+background:rgba(255,255,255,.30);
+
+}
 </style>
 
 </head>
@@ -300,7 +346,7 @@ Her geçen saniye seni bana biraz daha yaklaştırıyor...
 ❤️ Seni Çok Seviyorum ❤️
 
 </footer>
-
+<button id="musicBtn">⏸️ Müziği Durdur</button>
 </div>
 
 <script>
@@ -376,6 +422,29 @@ music.volume = 0.35;
 document.addEventListener("click", () => {
     music.play();
 }, { once: true });
+const musicBtn = document.getElementById("musicBtn");
+
+let playing = true;
+
+musicBtn.addEventListener("click",()=>{
+
+if(playing){
+
+music.pause();
+
+musicBtn.innerHTML="▶️ Müziği Başlat";
+
+}else{
+
+music.play();
+
+musicBtn.innerHTML="⏸️ Müziği Durdur";
+
+}
+
+playing=!playing;
+
+});
 </script>
 
 </body>
