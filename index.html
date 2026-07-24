@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kavuşmamıza Kalan Süre ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+height:100vh;
+overflow:hidden;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:url("background.jpg") center center;
+background-size:cover;
+background-repeat:no-repeat;
+
+position:relative;
+
+}
+
+body::before{
+
+content:"";
+position:absolute;
+
+left:0;
+top:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.45);
+
+backdrop-filter:blur(3px);
+
+}
+
+.container{
+
+position:relative;
+z-index:5;
+
+width:90%;
+max-width:900px;
+
+padding:45px;
+
+border-radius:30px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(16px);
+
+box-shadow:0 20px 60px rgba(0,0,0,.4);
+
+text-align:center;
+
+}
+
+h1{
+
+font-family:"Great Vibes",cursive;
+
+font-size:70px;
+
+color:#ffd4ea;
+
+text-shadow:0 0 25px #ff4fa3;
+
+margin-bottom:15px;
+
+}
+
+.subtitle{
+
+color:white;
+
+font-size:22px;
+
+margin-bottom:35px;
+
+}
+
+.countdown{
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.box{
+
+width:150px;
+
+padding:25px 15px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,.15);
+
+transition:.3s;
+
+}
+
+.box:hover{
+
+transform:translateY(-8px);
+
+background:rgba(255,255,255,.25);
+
+}
+
+.number{
+
+font-size:55px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+.label{
+
+margin-top:8px;
+
+color:white;
+
+letter-spacing:2px;
+
+}
+
+#finish{
+
+margin-top:35px;
+
+font-size:40px;
+
+color:white;
+
+font-weight:bold;
+
+}
+
+footer{
+
+margin-top:35px;
+
+font-size:18px;
+
+color:#ffe4ef;
+
+}
+
+.heart{
+
+position:absolute;
+
+color:#ff77b7;
+
+animation:rise linear forwards;
+
+pointer-events:none;
+
+}
+
+@keyframes rise{
+
+0%{
+
+transform:translateY(100vh) scale(.5);
+
+opacity:0;
+
+}
+
+15%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) scale(1.4);
+
+opacity:0;
+
+}
+
+}
+
+@media(max-width:700px){
+
+h1{
+
+font-size:48px;
+
+}
+
+.subtitle{
+
+font-size:18px;
+
+}
+
+.box{
+
+width:120px;
+
+}
+
+.number{
+
+font-size:42px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+<audio id="music" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+<div class="container">
+
+<h1>❤️ Kavuşmamıza Kalan Süre ❤️</h1>
+
+<div class="subtitle">
+
+Her geçen saniye seni bana biraz daha yaklaştırıyor...
+
+</div>
+
+<div class="countdown">
+
+<div class="box">
+
+<div id="days" class="number">0</div>
+
+<div class="label">GÜN</div>
+
+</div>
+
+<div class="box">
+
+<div id="hours" class="number">0</div>
+
+<div class="label">SAAT</div>
+
+</div>
+
+<div class="box">
+
+<div id="minutes" class="number">0</div>
+
+<div class="label">DAKİKA</div>
+
+</div>
+
+<div class="box">
+
+<div id="seconds" class="number">0</div>
+
+<div class="label">SANİYE</div>
+
+</div>
+
+</div>
+
+<div id="finish"></div>
+
+<footer>
+
+❤️ Seni Çok Seviyorum ❤️
+
+</footer>
+
+</div>
+
+<script>
+
+const targetDate = new Date("2026-09-12T00:00:00").getTime();
+
+function updateCountdown(){
+
+const now = new Date().getTime();
+
+const distance = targetDate - now;
+
+if(distance<=0){
+
+document.getElementById("finish").innerHTML="❤️ Nihayet Kavuştuk ❤️";
+
+return;
+
+}
+
+const days=Math.floor(distance/(1000*60*60*24));
+
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").innerHTML=days;
+
+document.getElementById("hours").innerHTML=hours;
+
+document.getElementById("minutes").innerHTML=minutes;
+
+document.getElementById("seconds").innerHTML=seconds;
+
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(18+Math.random()*25)+"px";
+
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},10000);
+
+}
+
+setInterval(createHeart,300);
+const music = document.getElementById("music");
+
+music.volume = 0.35;
+
+// Tarayıcı otomatik çalmayı engellerse
+document.addEventListener("click", () => {
+    music.play();
+}, { once: true });
+</script>
+
+</body>
+</html>
