@@ -346,7 +346,7 @@ Her geçen saniye seni bana biraz daha yaklaştırıyor...
 ❤️ Seni Çok Seviyorum ❤️
 
 </footer>
-<button id="musicBtn">⏸️ Müziği Durdur</button>
+<button id="musicBtn">▶️ Müziği Başlat</button>
 </div>
 
 <script>
@@ -419,12 +419,10 @@ const music = document.getElementById("music");
 music.volume = 0.35;
 
 // Tarayıcı otomatik çalmayı engellerse
-document.addEventListener("click", () => {
-    music.play();
-}, { once: true });
+
 const musicBtn = document.getElementById("musicBtn");
 
-let playing = true;
+let playing = false;
 
 musicBtn.addEventListener("click",()=>{
 
