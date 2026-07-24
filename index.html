@@ -285,6 +285,98 @@ transform:scale(1.08);
 background:rgba(255,255,255,.30);
 
 }
+#player{
+
+position:fixed;
+
+right:20px;
+bottom:20px;
+
+width:290px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:rgba(25,25,25,.45);
+
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,.12);
+
+box-shadow:0 10px 35px rgba(0,0,0,.35);
+
+z-index:9999;
+
+}
+
+#songTitle{
+
+text-align:center;
+
+color:white;
+
+font-size:16px;
+
+font-weight:600;
+
+margin-bottom:15px;
+
+}
+
+#controls{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+margin-bottom:15px;
+
+}
+
+#controls button{
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+cursor:pointer;
+
+font-size:22px;
+
+background:#ff4fa3;
+
+color:white;
+
+transition:.3s;
+
+}
+
+#controls button:hover{
+
+transform:scale(1.08);
+
+}
+
+#progress{
+
+width:100%;
+
+cursor:pointer;
+
+}
+
+#progress{
+
+accent-color:#ff4fa3;
+
+}
 </style>
 
 </head>
@@ -346,7 +438,28 @@ Her geçen saniye seni bana biraz daha yaklaştırıyor...
 ❤️ Seni Çok Seviyorum ❤️
 
 </footer>
-<button id="musicBtn">▶️ Müziği Başlat</button>
+<div id="player">
+
+    <div id="songTitle">
+        🎵 Bizim Şarkımız
+    </div>
+
+    <div id="controls">
+
+        <button id="playBtn">▶️</button>
+
+        <button id="muteBtn">🔊</button>
+
+    </div>
+
+    <input
+        type="range"
+        id="progress"
+        value="0"
+        min="0"
+        max="100">
+
+</div>
 </div>
 
 <script>
@@ -441,6 +554,52 @@ musicBtn.addEventListener("click", async () => {
         music.pause();
         playing = false;
         musicBtn.innerHTML = "▶️ Müziği Başlat";
+
+    }
+
+});
+const playBtn = document.getElementById("playBtn");
+const muteBtn = document.getElementById("muteBtn");
+const progress = document.getElementById("progress");
+
+playBtn.onclick = () => {
+
+    if (music.paused) {
+
+        music.play();
+        playBtn.innerHTML = "⏸️";
+
+    } else {
+
+        music.pause();
+        playBtn.innerHTML = "▶️";
+
+    }
+
+};
+
+muteBtn.onclick = () => {
+
+    music.muted = !music.muted;
+    muteBtn.innerHTML = music.muted ? "🔇" : "🔊";
+
+};
+
+music.addEventListener("timeupdate", () => {
+
+    if (music.duration) {
+
+        progress.value = (music.currentTime / music.duration) * 100;
+
+    }
+
+});
+
+progress.addEventListener("input", () => {
+
+    if (music.duration) {
+
+        music.currentTime = (progress.value / 100) * music.duration;
 
     }
 
