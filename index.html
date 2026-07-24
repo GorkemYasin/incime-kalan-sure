@@ -246,21 +246,113 @@ position:fixed;
 right:20px;
 bottom:20px;
 
-width:290px;
+width:340px;
 
-padding:18px;
+display:flex;
+
+gap:15px;
+
+padding:15px;
+
+background:rgba(20,20,20,.55);
 
 border-radius:18px;
 
-background:rgba(25,25,25,.45);
-
 backdrop-filter:blur(12px);
 
-border:1px solid rgba(255,255,255,.12);
+border:1px solid rgba(255,255,255,.15);
 
-box-shadow:0 10px 35px rgba(0,0,0,.35);
+box-shadow:0 10px 30px rgba(0,0,0,.4);
 
 z-index:9999;
+
+}
+
+#cover{
+
+width:90px;
+
+height:90px;
+
+border-radius:12px;
+
+object-fit:cover;
+
+}
+
+#playerInfo{
+
+flex:1;
+
+}
+
+#songTitle{
+
+color:white;
+
+font-size:17px;
+
+font-weight:bold;
+
+margin-bottom:5px;
+
+}
+
+#artist{
+
+color:#bbbbbb;
+
+font-size:13px;
+
+margin-bottom:10px;
+
+}
+
+#time{
+
+color:white;
+
+font-size:13px;
+
+margin-bottom:10px;
+
+}
+
+#controls{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:10px;
+
+}
+
+#controls button{
+
+width:45px;
+
+height:45px;
+
+border:none;
+
+border-radius:50%;
+
+background:#ff4fa3;
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+#progress{
+
+width:100%;
+
+accent-color:#ff4fa3;
 
 }
 
@@ -394,26 +486,45 @@ Her geçen saniye seni bana biraz daha yaklaştırıyor...
 </footer>
 <div id="player">
 
-    <div id="songTitle">
-        🎵 Bizim Şarkımız
+    <img id="cover" src="album.jpg">
+
+    <div id="playerInfo">
+
+        <div id="songTitle">
+            Bir Ateşe Attın Beni
+        </div>
+
+        <div id="artist">
+            ❤️ Görkem & ❤️
+        </div>
+
+        <div id="time">
+
+            <span id="current">00:00</span>
+
+            /
+
+            <span id="duration">00:00</span>
+
+        </div>
+
+        <div id="controls">
+
+            <button id="playBtn">▶️</button>
+
+            <button id="muteBtn">🔊</button>
+
+        </div>
+
+        <input
+            type="range"
+            id="progress"
+            value="0"
+            min="0"
+            max="100">
+
     </div>
 
-    <div id="controls">
-
-        <button id="playBtn">▶️</button>
-
-        <button id="muteBtn">🔊</button>
-
-    </div>
-
-    <input
-        type="range"
-        id="progress"
-        value="0"
-        min="0"
-        max="100">
-
-</div>
 </div>
 
 <script>
@@ -525,6 +636,29 @@ music.addEventListener("timeupdate", () => {
         progress.value = (music.currentTime / music.duration) * 100;
 
     }
+
+});
+const current = document.getElementById("current");
+const duration = document.getElementById("duration");
+
+function formatTime(sec) {
+
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+
+    return `${m}:${s < 10 ? "0" : ""}${s}`;
+
+}
+
+music.addEventListener("loadedmetadata", () => {
+
+    duration.textContent = formatTime(music.duration);
+
+});
+
+music.addEventListener("timeupdate", () => {
+
+    current.textContent = formatTime(music.currentTime);
 
 });
 
