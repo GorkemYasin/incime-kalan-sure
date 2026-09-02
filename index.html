@@ -163,30 +163,6 @@ font-weight:bold;
 
 }
 
-/* Sayaç Kontrol Butonu Stili */
-.countdown-control {
-margin-top: 25px;
-}
-
-.countdown-control button {
-padding: 10px 25px;
-font-size: 16px;
-font-weight: 500;
-border: none;
-border-radius: 20px;
-background: rgba(255, 79, 163, 0.85);
-color: white;
-cursor: pointer;
-transition: .3s;
-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.countdown-control button:hover {
-background: #ff4fa3;
-transform: scale(1.05);
-}
-
 footer{
 
 margin-top:35px;
@@ -501,11 +477,6 @@ Her geçen saniye seni bana biraz daha yaklaştırıyor...
 
 </div>
 
-<!-- Sayaç Durdur/Başlat Butonu -->
-<div class="countdown-control">
-    <button id="toggleCountdownBtn">⏸️ Sayacı Durdur</button>
-</div>
-
 <div id="finish"></div>
 
 <footer>
@@ -559,8 +530,6 @@ Her geçen saniye seni bana biraz daha yaklaştırıyor...
 <script>
 
 const targetDate = new Date("2026-09-12T00:00:00").getTime();
-let countdownTimer = null; // Sayaç döngüsünü tutan değişken
-let isRunning = false;     // Sayacın çalışıp çalışmadığını takip eden durum
 
 function updateCountdown(){
 
@@ -571,7 +540,7 @@ const distance = targetDate - now;
 if(distance<=0){
 
 document.getElementById("finish").innerHTML="❤️ Nihayet Kavuştuk ❤️";
-stopCountdown();
+
 return;
 
 }
@@ -594,36 +563,9 @@ document.getElementById("seconds").innerHTML=seconds;
 
 }
 
-// Sayacı başlatan fonksiyon
-function startCountdown(){
-if(!isRunning){
-updateCountdown();
-countdownTimer = setInterval(updateCountdown, 1000);
-isRunning = true;
-document.getElementById("toggleCountdownBtn").innerHTML = "⏸️ Sayacı Durdur";
-}
-}
-
-// Sayacı durduran fonksiyon
-function stopCountdown(){
-if(isRunning){
-clearInterval(countdownTimer);
-isRunning = false;
-document.getElementById("toggleCountdownBtn").innerHTML = "▶️ Sayacı Başlat";
-}
-}
-
-// Durdur/Başlat Buton Mantığı
-document.getElementById("toggleCountdownBtn").onclick = () => {
-if(isRunning){
-stopCountdown();
-} else {
-startCountdown();
-}
-};
-
-// Sayacı otomatik başlat
-startCountdown();
+// Sayacı açmak istediğinde aşağıdaki iki satırın başındaki // işaretlerini kaldır:
+// setInterval(updateCountdown,1000);
+// updateCountdown();
 
 function createHeart(){
 
