@@ -153,13 +153,19 @@ letter-spacing:2px;
 
 #finish{
 
-margin-top:35px;
+margin-top:20px;
 
-font-size:40px;
+font-size:22px;
 
-color:white;
+color:#ffd4ea;
 
-font-weight:bold;
+font-weight:500;
+
+line-height:1.6;
+
+padding:0 15px;
+
+text-shadow:0 0 15px rgba(255, 79, 163, 0.6);
 
 }
 
@@ -234,6 +240,12 @@ width:120px;
 .number{
 
 font-size:42px;
+
+}
+
+#finish{
+
+font-size:18px;
 
 }
 
@@ -539,7 +551,15 @@ const distance = targetDate - now;
 
 if(distance<=0){
 
-document.getElementById("finish").innerHTML="❤️ Nihayet Kavuştuk ❤️";
+document.querySelector(".countdown").style.display = "none";
+document.querySelector(".subtitle").style.display = "none";
+
+document.getElementById("finish").innerHTML = `
+    ❤️ <b style="font-size:28px;">Nihayet Kavuştuk!</b> ❤️<br><br>
+    Geçen her saniyeyi, katettiğimiz her kilometreyi ve sabırla beklediğimiz tüm o günleri geride bıraktık. 
+    Zaman artık ikimizin arasında bir engel değil, şahidimiz. Şimdi gözlerinin içine bakıp elini tutma vakti. 
+    Sonsuzluğumuza, kavuşmamıza hoş geldin sevgilim...
+`;
 
 return;
 
